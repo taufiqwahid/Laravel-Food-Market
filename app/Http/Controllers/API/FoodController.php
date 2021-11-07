@@ -52,6 +52,6 @@ class FoodController extends Controller
             $food->where('rate', '<= ', $rate_to);
         }
 
-        return ResponseFormatter::success($food->paginate($limit), 'Data list berhasil diambil');
+        return ResponseFormatter::success($food->paginate($limit), 'Data list produk berhasil diambil');
     }
 }
