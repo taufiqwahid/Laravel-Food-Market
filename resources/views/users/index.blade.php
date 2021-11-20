@@ -15,7 +15,7 @@
                 <table class="table-auto w-full">
                     <thead>
                         <tr>
-                            <th class="border px-6 py-4">ID</th>
+                            <td class="border px-6 py-4">ID</td>
                             <th class="border px-6 py-4">Name</th>
                             <th class="border px-6 py-4">Email</th>
                             <th class="border px-6 py-4">Roles</th>
@@ -23,13 +23,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($user as $item)
+                      
+                        @forelse ($user as $item)
                         <tr>
-                            <th class="border px-6 py-4">{{ $item->id }}</th>
-                            <th class="border px-6 py-4">{{ $item->name }}</th>
-                            <th class="border px-6 py-4">{{ $item->email }}</th>
-                            <th class="border px-6 py-4">{{ $item->roles }}</th>
-                            <th class="border px-6 py-4">
+                            <td class="border px-6 py-4">{{ $item->id }}</td>
+                            <td class="border px-6 py-4">{{ $item->name }}</td>
+                            <td class="border px-6 py-4">{{ $item->email }}</td>
+                            <td class="border px-6 py-4">{{ $item->roles }}</td>
+                            <td class="border px-6 py-4 text-center">
                                 <a href="{{ route('users.edit', $item->id) }}" class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-2 rounded ">
                                 Edit
                                 </a>
@@ -37,12 +38,21 @@
                                     {!! method_field('delete') . csrf_field() !!}
                                     <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mx-2 rounded">Delete</button>
                                 </form>
-                            </th>
+                            </td>
                                 
                         </tr>
-                            @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="5" class="border text-center p-5">
+                                    Data Tidak Ditemukan
+                                </td>
+                            </tr>
+                        @endforelse
                     </tbody>
                 </table>
+            </div>
+            <div class="text-center mt-5">
+                {{ $user->links() }}
             </div>
         </div>
     </div>
