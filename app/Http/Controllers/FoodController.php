@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UserRequest;
-use App\Models\User;
+use App\Models\Food;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class FoodController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +14,9 @@ class UserController extends Controller
      */
     public function index()
     {
-
-        $user =  User::paginate(10);
-        return view('users.index', [
-            'user' => $user
+        $food  = Food::paginate(10);
+        return view('food.index', [
+            'food' => $food
         ]);
     }
 
@@ -29,7 +27,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        //
     }
 
     /**
@@ -38,14 +36,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->all();
-        $data['profile_photo_path'] = $request->file('profile_photo_path')->store('assets/public');
-
-        User::create($data);
-
-        return redirect()->route('users.index');
+        //
     }
 
     /**
@@ -54,7 +47,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Food $food)
     {
         //
     }
@@ -65,11 +58,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Food $food)
     {
-        return view('users.edit', [
-            'item' => $user
-        ]);
     }
 
     /**
@@ -79,15 +69,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, User $user)
+    public function update(Request $request, Food $food)
     {
-        $data = $request->all();
-
-        if ($request->file('profile_picture_path')) {
-            $data['profile_photo_path'] = $request->file('profile_photo_path')->store('assets/public');
-        }
-        $user->update($data);
-        return redirect()->route('users.index');
+        //
     }
 
     /**
@@ -96,9 +80,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Food $food)
     {
-        $user->delete();
-        return redirect()->route('users.index');
+        //
     }
 }
